@@ -19,7 +19,19 @@ int open_file(char* fname, FILE** input) {
 // This parse_str_to_list() split string to the tokens, and put the tokens in token_list.
 // The value of return is the number of tokens.
 int parse_str_to_list(const char* str, char** token_list) {
-    /* Fill this function */
+    
+    int num_token = 0;
+    char *ptr;
+    ptr = strtok((char*)str, "/\n");
+    while (ptr != NULL) {
+        // token_list[num_token] = ptr;
+        token_list[num_token] = malloc(strlen(ptr)+1);
+        strcpy(token_list[num_token], ptr);
+        num_token++;
+        ptr = strtok(NULL, "/\n");
+    }
+
+    return num_token;
 }
 
 void free_token_list(char** token_list, int num_token) {
